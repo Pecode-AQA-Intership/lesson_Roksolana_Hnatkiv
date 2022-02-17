@@ -1,0 +1,20 @@
+{
+    "firstName": "#firstName",
+    "lastName": "#lastName",
+    "userEmail": "#userEmail",
+    "genderOther": "input#gender-radio-3",
+    "userNumber": "#userNumber",
+    "dateOfBirth": "#dateOfBirthInput",
+    "year": ".react-datepicker__year-select",
+    "month": ".react-datepicker__month-select",
+    "day": ".react-datepicker__day.react-datepicker__day--007",
+    "subject": ".subjects-auto-complete__control.css-yk16xz-control",
+    "hobbies": "input[type='checkbox']",
+    "uploadPicture": "#uploadPicture",
+    "currentAddress": "#currentAddress",
+    "state": "#state",
+    "city": "#city",
+    "submitButton": "#submit",
+    "modalBody": ".modal-body",
+    "closeModal": "#closeLargeModal"
+}
