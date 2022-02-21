@@ -8,7 +8,7 @@ const PERMANENT_ADDRESS = faker.address.secondaryAddress();
 
 describe("Test Text Box", () => {
     it("Check if the User can fills all fields and clicks on the 'Submit' button", () => {
-        cy.visit("/");
+        cy.visit("/text-box");
 
         cy.get('#userName')
             .type(FULL_NAME)
