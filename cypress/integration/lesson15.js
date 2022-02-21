@@ -1,6 +1,6 @@
-import * as selectors from "./selectors.js"
-import * as testData from "./testData"
-import * as functions from "./functions"
+import * as selectors from "./selectors.js";
+import * as testData from "./testData";
+import * as functions from "./functions";
 
 
 describe("Testing of Web Tables page", () => {
@@ -31,12 +31,12 @@ describe("Testing of Web Tables page", () => {
 
         cy.get(selectors.SUBMIT).click();
 
-        cy.contains(testData.TEST_FIRST_NAME);
-        cy.contains(testData.TEST_LAST_NAME);
-        cy.contains(testData.TEST_EMAIL);
-        cy.contains(testData.TEST_AGE);
-        cy.contains(testData.TEST_SALARY);
-        cy.contains(testData.TEST_DEPARTMENT);
+        cy.get(selectors.TABLE).should("include.text", testData.TEST_FIRST_NAME)
+            .and("include.text", testData.TEST_LAST_NAME)
+            .and("include.text", testData.TEST_EMAIL)
+            .and("include.text", testData.TEST_AGE)
+            .and("include.text", testData.TEST_SALARY)
+            .and("include.text", testData.TEST_DEPARTMENT);
 
     })
 
@@ -63,36 +63,36 @@ describe("Testing of Web Tables page", () => {
 
         cy.get(selectors.SUBMIT).click();
 
-        cy.contains(testData.TEST_FIRST_NAME);
-        cy.contains(testData.TEST_LAST_NAME);
-        cy.contains(testData.TEST_EMAIL);
-        cy.contains(testData.TEST_AGE);
-        cy.contains(testData.TEST_SALARY);
-        cy.contains(testData.TEST_DEPARTMENT);
+        cy.get(selectors.TABLE).should("include.text", testData.TEST_FIRST_NAME)
+            .and("include.text", testData.TEST_LAST_NAME)
+            .and("include.text", testData.TEST_EMAIL)
+            .and("include.text", testData.TEST_AGE)
+            .and("include.text", testData.TEST_SALARY)
+            .and("include.text", testData.TEST_DEPARTMENT);
 
     })
 
     it("Check if the search works for each field", () => {
 
-        let SearchUser = cy.get(selectors.SEARCH_USER);
+        let searchUser = cy.get(selectors.SEARCH_USER);
 
         cy.get(selectors.SEARCH).type(testData.TEST_FIRST_NAME);
-        SearchUser.should("exist");
+        searchUser.should("exist");
 
         cy.get(selectors.SEARCH).clear().type(testData.TEST_LAST_NAME);
-        SearchUser.should("exist");
+        searchUser.should("exist");
 
         cy.get(selectors.SEARCH).clear().type(testData.TEST_EMAIL);
-        SearchUser.should("exist");
+        searchUser.should("exist");
 
         cy.get(selectors.SEARCH).clear().type(testData.TEST_AGE);
-        SearchUser.should("exist");
+        searchUser.should("exist");
 
         cy.get(selectors.SEARCH).clear().type(testData.TEST_SALARY);
-        SearchUser.should("exist");
+        searchUser.should("exist");
 
         cy.get(selectors.SEARCH).clear().type(testData.TEST_DEPARTMENT);
-        SearchUser.should("exist");
+        searchUser.should("exist");
 
         cy.get(selectors.SEARCH).clear();
 
@@ -106,118 +106,43 @@ describe("Testing of Web Tables page", () => {
 
     it("Check if user can sort by First Name", () => {
 
-        cy.get(selectors.SORT_FIRST_NAMES).click()
-            .should("have.class", selectors.ASC)
-            .then(functions.getInnerText)
-            .then((firstNames) => {
-                let sortFirstNames = functions.stringSort(firstNames);
-                expect(firstNames).to.deep.equal(sortFirstNames);
-            })
+        functions.sortByText(selectors.SORT_FIRST_NAMES, selectors.ASC);
+        functions.sortByText(selectors.SORT_FIRST_NAMES, selectors.DESC);
 
-        cy.get(selectors.SORT_FIRST_NAMES).click()
-            .should("have.class", selectors.DESC)
-            .then(functions.getInnerText)
-            .then((firstNames) => {
-                let sortFirstNames = functions.stringSort(firstNames);
-                expect(firstNames).to.deep.equal(sortFirstNames);
-            })
     })
 
     it("Check if user can sort by Last Name", () => {
 
-        cy.get(selectors.SORT_LAST_NAMES).click()
-            .should("have.class", selectors.ASC)
-            .then(functions.getInnerText)
-            .then((lastNames) => {
-                let sortLastNames = functions.stringSort(lastNames);
-                expect(lastNames).to.deep.equal(sortLastNames);
-            })
+        functions.sortByText(selectors.SORT_LAST_NAMES, selectors.ASC);
+        functions.sortByText(selectors.SORT_LAST_NAMES, selectors.DESC);
 
-        cy.get(selectors.SORT_LAST_NAMES).click()
-            .should("have.class", selectors.DESC)
-            .then(functions.getInnerText)
-            .then((lastNames) => {
-                let sortLastNames = functions.stringSort(lastNames);
-                expect(lastNames).to.deep.equal(sortLastNames);
-            })
     })
 
     it("Check if user can sort by Age", () => {
 
-        cy.get(selectors.SORT_AGES).click()
-            .should("have.class", selectors.ASC)
-            .then(functions.getNumbers)
-            .then((ages) => {
-                let sortAges = functions.stringSort(ages);
-                expect(ages).to.deep.equal(sortAges);
-            })
+        functions.sortByNumbers(selectors.SORT_AGES, selectors.ASC);
+        functions.sortByNumbers(selectors.SORT_AGES, selectors.DESC);
 
-        cy.get(selectors.SORT_AGES).click()
-            .should("have.class", selectors.DESC)
-            .then(functions.getNumbers)
-            .then((ages) => {
-                let sortAges = functions.stringSort(ages);
-                expect(ages).to.deep.equal(sortAges);
-            })
     })
 
     it("Check if user can sort by Email", () => {
 
-        cy.get(selectors.SORT_EMAILS).click()
-            .should("have.class", selectors.ASC)
-            .then(functions.getInnerText)
-            .then(functions.getNumbers)
-            .then((emails) => {
-                let sortEmails = functions.stringSort(emails);
-                expect(emails).to.deep.equal(sortEmails);
-            })
+        functions.sortByTextAndNumbers(selectors.SORT_EMAILS, selectors.ASC);
+        functions.sortByTextAndNumbers(selectors.SORT_EMAILS, selectors.DESC);
 
-        cy.get(selectors.SORT_EMAILS).click()
-            .should("have.class", selectors.DESC)
-            .then(functions.getInnerText)
-            .then(functions.getNumbers)
-            .then((emails) => {
-                let sortEmails = functions.stringSort(emails);
-                expect(emails).to.deep.equal(sortEmails);
-            })
     })
 
     it("Check if user can sort by Salary", () => {
 
-        cy.get(selectors.SORT_SALARY).click()
-            .should("have.class", selectors.ASC)
-            .then(functions.getNumbers)
-            .then((salary) => {
-                let sortSalary = functions.stringSort(salary);
-                expect(salary).to.deep.equal(sortSalary);
-            })
+        functions.sortByNumbers(selectors.SORT_SALARY, selectors.ASC);
+        functions.sortByNumbers(selectors.SORT_SALARY, selectors.DESC);
 
-        cy.get(selectors.SORT_SALARY).click()
-            .should("have.class", selectors.DESC)
-            .then(functions.getNumbers)
-            .then((salary) => {
-                let sortSalary = functions.stringSort(salary);
-                expect(salary).to.deep.equal(sortSalary);
-            })
     })
 
     it("Check if user can sort by Department", () => {
 
-        cy.get(selectors.SORT_DEPARTMENTS).click()
-            .should("have.class", selectors.ASC)
-            .then(functions.getInnerText)
-            .then((departments) => {
-                let sortDepartments = functions.stringSort(departments);
-                expect(departments).to.deep.equal(sortDepartments);
-            })
-
-        cy.get(selectors.SORT_DEPARTMENTS).click()
-            .should("have.class", selectors.DESC)
-            .then(functions.getInnerText)
-            .then((departments) => {
-                let sortDepartments = functions.stringSort(departments);
-                expect(departments).to.deep.equal(sortDepartments);
-            })
+        functions.sortByText(selectors.SORT_DEPARTMENTS, selectors.ASC);
+        functions.sortByText(selectors.SORT_DEPARTMENTS, selectors.DESC);
     })
 
 })
