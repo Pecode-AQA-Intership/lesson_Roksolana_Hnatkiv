@@ -1,5 +1,5 @@
-import * as data from "./const"
-let selector = require("./../pageObject/selectors.json")
+import * as data from "./const";
+let selector = require("../pageObject/selectors.json");
 
 describe("Test Student Registration Form", () => {
     it("Check if the User can fills all fields and clicks on the 'Submit' button", () => {
@@ -19,28 +19,28 @@ describe("Test Student Registration Form", () => {
 
         cy.get(selector.genderOther)
             .check({ force: true })
-            .should("have.css", "background-image")
+            .should("have.css", "background-image");
 
         cy.get(selector.userNumber)
             .type(data.TEST_USER_NUMBER)
             .should("have.value", data.TEST_USER_NUMBER);
 
-        cy.get(selector.dateOfBirth).click()
-        cy.get(selector.month).select('3')
-        cy.get(selector.year).select('2002')
-        cy.get(selector.day).first().click()
-        cy.get(selector.dateOfBirth).should("have.value", "07 Apr 2002")
+        cy.get(selector.dateOfBirth).click();
+        cy.get(selector.month).select('3');
+        cy.get(selector.year).select('2002');
+        cy.get(selector.day).first().click();
+        cy.get(selector.dateOfBirth).should("have.value", "07 Apr 2002");
 
         cy.get(selector.subject)
             .click()
-            .type('Maths{enter}')
-            .should("have.text", "Maths")
+            .type("Maths{enter}")
+            .should("have.text", "Maths");
 
         cy.get(selector.hobbies)
             .click({ force: true, multiple: true })
-            .should("have.css", "background-image")
+            .should("have.css", "background-image");
 
-        cy.get(selector.uploadPicture).attachFile(data.FILE_PATH)
+        cy.get(selector.uploadPicture).attachFile(data.FILE_PATH);
 
         cy.get(selector.currentAddress)
             .type(data.TEST_CURRENT_ADDRESS)
@@ -48,13 +48,13 @@ describe("Test Student Registration Form", () => {
 
         cy.get(selector.state).click()
             .type("Ut{enter}")
-            .should("contain", "Uttar Pradesh")
+            .should("contain", "Uttar Pradesh");
 
         cy.get(selector.city).click()
             .type("Luck{enter}")
-            .should("contain", "Lucknow")
+            .should("contain", "Lucknow");
 
-        cy.get(selector.submitButton).click()
+        cy.get(selector.submitButton).click();
 
     })
 
@@ -74,7 +74,7 @@ describe("Test Student Registration Form", () => {
             .and("contain", "Lucknow")
             .and("contain", "monkey.jpeg");
 
-        cy.get(selector.closeModal).click({ force: true })
+        cy.get(selector.closeModal).click({ force: true });
     })
 
 })
